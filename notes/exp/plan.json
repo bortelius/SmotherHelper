@@ -1,0 +1,47 @@
+{
+ "exp": "grid39",
+ "tc": "5+0.05",
+ "chunk": 100,
+ "runs": [
+  {
+   "name": "e1500_C",
+   "elo": 1500,
+   "games": 3500,
+   "seed": 8000,
+   "chunk": 100,
+   "opts": []
+  },
+  {
+   "name": "e1500_L2",
+   "elo": 1500,
+   "games": 3500,
+   "seed": 8000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildLmr=2048"
+   ]
+  },
+  {
+   "name": "e2500_C",
+   "elo": 2500,
+   "games": 1400,
+   "seed": 8000,
+   "chunk": 100,
+   "opts": []
+  },
+  {
+   "name": "e2500_L2",
+   "elo": 2500,
+   "games": 1400,
+   "seed": 8000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildLmr=2048"
+   ]
+  }
+ ],
+ "shard": [
+  0,
+  7
+ ]
+}
