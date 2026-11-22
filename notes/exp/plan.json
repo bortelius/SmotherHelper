@@ -1,0 +1,129 @@
+{
+ "exp": "grid36",
+ "tc": "5+0.05",
+ "chunk": 100,
+ "shard": [
+  0,
+  6
+ ],
+ "runs": [
+  {
+   "name": "e1500_C",
+   "elo": 1500,
+   "games": 1200,
+   "seed": 5000,
+   "chunk": 100,
+   "opts": []
+  },
+  {
+   "name": "e1500_L1",
+   "elo": 1500,
+   "games": 1200,
+   "seed": 5000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildLmr=1024"
+   ]
+  },
+  {
+   "name": "e1500_L2",
+   "elo": 1500,
+   "games": 1200,
+   "seed": 5000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildLmr=2048"
+   ]
+  },
+  {
+   "name": "e1500_D",
+   "elo": 1500,
+   "games": 1200,
+   "seed": 5000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildDefLmr=1024"
+   ]
+  },
+  {
+   "name": "e1500_LD",
+   "elo": 1500,
+   "games": 1200,
+   "seed": 5000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildLmr=1024",
+    "SmotherBuildDefLmr=1024"
+   ]
+  },
+  {
+   "name": "e1500_N",
+   "elo": 1500,
+   "games": 1200,
+   "seed": 5000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildNmp=2"
+   ]
+  },
+  {
+   "name": "e2500_C",
+   "elo": 2500,
+   "games": 600,
+   "seed": 5000,
+   "chunk": 100,
+   "opts": []
+  },
+  {
+   "name": "e2500_L1",
+   "elo": 2500,
+   "games": 600,
+   "seed": 5000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildLmr=1024"
+   ]
+  },
+  {
+   "name": "e2500_L2",
+   "elo": 2500,
+   "games": 600,
+   "seed": 5000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildLmr=2048"
+   ]
+  },
+  {
+   "name": "e2500_D",
+   "elo": 2500,
+   "games": 600,
+   "seed": 5000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildDefLmr=1024"
+   ]
+  },
+  {
+   "name": "e2500_LD",
+   "elo": 2500,
+   "games": 600,
+   "seed": 5000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildLmr=1024",
+    "SmotherBuildDefLmr=1024"
+   ]
+  },
+  {
+   "name": "e2500_N",
+   "elo": 2500,
+   "games": 600,
+   "seed": 5000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildNmp=2"
+   ]
+  }
+ ]
+}

@@ -259,6 +259,16 @@ Engine::Engine(std::optional<std::filesystem::path> path) :
     // While building, use at least 1/N of the clock left per move (0 = off).
     options.add("SmotherBuildTime", Option(0, 0, 200));
     options.add("SmotherBuildStarveAt", Option(4, 0, 15));
+    // Search control in construction mode (all 0 = off, the search is then
+    // unchanged). Lmr: less late-move reduction (1/1024 plies) for our quiet
+    // moves that bring a knight closer to a square checking the enemy king or
+    // newly cover a free square next to it. DefLmr: the same for the
+    // defender's quiet moves that leave a square next to its own king (they
+    // can open a flight square). Nmp: no null move for our side while the
+    // enemy king has at most that many squares not held by its own pieces.
+    options.add("SmotherBuildLmr", Option(0, 0, 4096));
+    options.add("SmotherBuildDefLmr", Option(0, 0, 4096));
+    options.add("SmotherBuildNmp", Option(0, 0, 8));
 
     // While pondering, let the parallel prover search deep and unbounded on
     // the opponent's time.
