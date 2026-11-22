@@ -1,0 +1,453 @@
+{
+ "exp": "tune1",
+ "tc": "5+0.05",
+ "chunk": 50,
+ "runs": [
+  {
+   "name": "e1500_c00",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=12 10 25 10 4 3",
+    "SmotherBuildKeep=8",
+    "SmotherBuildKeepNear=3",
+    "SmotherBuildEscape=0"
+   ]
+  },
+  {
+   "name": "e1500_v01",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=11 11 38 10 4 3",
+    "SmotherBuildKeep=5",
+    "SmotherBuildKeepNear=3",
+    "SmotherBuildEscape=2"
+   ]
+  },
+  {
+   "name": "e1500_v02",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=6 8 13 14 5 1",
+    "SmotherBuildKeep=13",
+    "SmotherBuildKeepNear=5",
+    "SmotherBuildEscape=9"
+   ]
+  },
+  {
+   "name": "e1500_v03",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=14 11 35 5 2 4",
+    "SmotherBuildKeep=9",
+    "SmotherBuildKeepNear=4",
+    "SmotherBuildEscape=9"
+   ]
+  },
+  {
+   "name": "e1500_v04",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=17 10 29 10 5 3",
+    "SmotherBuildKeep=6",
+    "SmotherBuildKeepNear=5",
+    "SmotherBuildEscape=1"
+   ]
+  },
+  {
+   "name": "e1500_v05",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=15 8 17 7 2 4",
+    "SmotherBuildKeep=7",
+    "SmotherBuildKeepNear=4",
+    "SmotherBuildEscape=0"
+   ]
+  },
+  {
+   "name": "e1500_v06",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=17 4 16 15 4 5",
+    "SmotherBuildKeep=7",
+    "SmotherBuildKeepNear=1",
+    "SmotherBuildEscape=10"
+   ]
+  },
+  {
+   "name": "e1500_v07",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=9 5 20 16 5 2",
+    "SmotherBuildKeep=6",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=7"
+   ]
+  },
+  {
+   "name": "e1500_v08",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=7 11 23 6 5 2",
+    "SmotherBuildKeep=9",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=3"
+   ]
+  },
+  {
+   "name": "e1500_v09",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=5 14 39 11 6 1",
+    "SmotherBuildKeep=5",
+    "SmotherBuildKeepNear=5",
+    "SmotherBuildEscape=9"
+   ]
+  },
+  {
+   "name": "e1500_v10",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=6 16 16 7 5 2",
+    "SmotherBuildKeep=6",
+    "SmotherBuildKeepNear=1",
+    "SmotherBuildEscape=9"
+   ]
+  },
+  {
+   "name": "e1500_v11",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=14 4 21 11 2 3",
+    "SmotherBuildKeep=11",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=10"
+   ]
+  },
+  {
+   "name": "e1500_v12",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=7 15 35 7 3 4",
+    "SmotherBuildKeep=12",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=7"
+   ]
+  },
+  {
+   "name": "e1500_v13",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=13 9 13 4 6 2",
+    "SmotherBuildKeep=10",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=9"
+   ]
+  },
+  {
+   "name": "e1500_v14",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=12 10 38 16 2 3",
+    "SmotherBuildKeep=9",
+    "SmotherBuildKeepNear=3",
+    "SmotherBuildEscape=3"
+   ]
+  },
+  {
+   "name": "e1500_v15",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=18 6 10 7 4 1",
+    "SmotherBuildKeep=5",
+    "SmotherBuildKeepNear=3",
+    "SmotherBuildEscape=2"
+   ]
+  },
+  {
+   "name": "e1500_v16",
+   "elo": 1500,
+   "games": 600,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=6 6 24 8 5 3",
+    "SmotherBuildKeep=12",
+    "SmotherBuildKeepNear=3",
+    "SmotherBuildEscape=7"
+   ]
+  },
+  {
+   "name": "e2500_c00",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=12 10 25 10 4 3",
+    "SmotherBuildKeep=8",
+    "SmotherBuildKeepNear=3",
+    "SmotherBuildEscape=0"
+   ]
+  },
+  {
+   "name": "e2500_v01",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=11 11 38 10 4 3",
+    "SmotherBuildKeep=5",
+    "SmotherBuildKeepNear=3",
+    "SmotherBuildEscape=2"
+   ]
+  },
+  {
+   "name": "e2500_v02",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=6 8 13 14 5 1",
+    "SmotherBuildKeep=13",
+    "SmotherBuildKeepNear=5",
+    "SmotherBuildEscape=9"
+   ]
+  },
+  {
+   "name": "e2500_v03",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=14 11 35 5 2 4",
+    "SmotherBuildKeep=9",
+    "SmotherBuildKeepNear=4",
+    "SmotherBuildEscape=9"
+   ]
+  },
+  {
+   "name": "e2500_v04",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=17 10 29 10 5 3",
+    "SmotherBuildKeep=6",
+    "SmotherBuildKeepNear=5",
+    "SmotherBuildEscape=1"
+   ]
+  },
+  {
+   "name": "e2500_v05",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=15 8 17 7 2 4",
+    "SmotherBuildKeep=7",
+    "SmotherBuildKeepNear=4",
+    "SmotherBuildEscape=0"
+   ]
+  },
+  {
+   "name": "e2500_v06",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=17 4 16 15 4 5",
+    "SmotherBuildKeep=7",
+    "SmotherBuildKeepNear=1",
+    "SmotherBuildEscape=10"
+   ]
+  },
+  {
+   "name": "e2500_v07",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=9 5 20 16 5 2",
+    "SmotherBuildKeep=6",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=7"
+   ]
+  },
+  {
+   "name": "e2500_v08",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=7 11 23 6 5 2",
+    "SmotherBuildKeep=9",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=3"
+   ]
+  },
+  {
+   "name": "e2500_v09",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=5 14 39 11 6 1",
+    "SmotherBuildKeep=5",
+    "SmotherBuildKeepNear=5",
+    "SmotherBuildEscape=9"
+   ]
+  },
+  {
+   "name": "e2500_v10",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=6 16 16 7 5 2",
+    "SmotherBuildKeep=6",
+    "SmotherBuildKeepNear=1",
+    "SmotherBuildEscape=9"
+   ]
+  },
+  {
+   "name": "e2500_v11",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=14 4 21 11 2 3",
+    "SmotherBuildKeep=11",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=10"
+   ]
+  },
+  {
+   "name": "e2500_v12",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=7 15 35 7 3 4",
+    "SmotherBuildKeep=12",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=7"
+   ]
+  },
+  {
+   "name": "e2500_v13",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=13 9 13 4 6 2",
+    "SmotherBuildKeep=10",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=9"
+   ]
+  },
+  {
+   "name": "e2500_v14",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=12 10 38 16 2 3",
+    "SmotherBuildKeep=9",
+    "SmotherBuildKeepNear=3",
+    "SmotherBuildEscape=3"
+   ]
+  },
+  {
+   "name": "e2500_v15",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=18 6 10 7 4 1",
+    "SmotherBuildKeep=5",
+    "SmotherBuildKeepNear=3",
+    "SmotherBuildEscape=2"
+   ]
+  },
+  {
+   "name": "e2500_v16",
+   "elo": 2500,
+   "games": 300,
+   "seed": 10000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=6 6 24 8 5 3",
+    "SmotherBuildKeep=12",
+    "SmotherBuildKeepNear=3",
+    "SmotherBuildEscape=7"
+   ]
+  }
+ ],
+ "shard": [
+  0,
+  6
+ ]
+}
