@@ -1,0 +1,61 @@
+{
+ "exp": "grid38",
+ "tc": "5+0.05",
+ "chunk": 100,
+ "runs": [
+  {
+   "name": "e1500_ff0",
+   "elo": 1500,
+   "games": 1500,
+   "seed": 7000,
+   "chunk": 100,
+   "opts": [
+    "SmotherFullFirst=0"
+   ]
+  },
+  {
+   "name": "e1500_ff30",
+   "elo": 1500,
+   "games": 1500,
+   "seed": 7000,
+   "chunk": 100,
+   "opts": [
+    "SmotherFullFirst=30"
+   ]
+  },
+  {
+   "name": "e1500_ff60",
+   "elo": 1500,
+   "games": 1500,
+   "seed": 7000,
+   "chunk": 100,
+   "opts": [
+    "SmotherFullFirst=60"
+   ]
+  },
+  {
+   "name": "e2500_ff0",
+   "elo": 2500,
+   "games": 600,
+   "seed": 7000,
+   "chunk": 100,
+   "opts": [
+    "SmotherFullFirst=0"
+   ]
+  },
+  {
+   "name": "e2500_ff60",
+   "elo": 2500,
+   "games": 600,
+   "seed": 7000,
+   "chunk": 100,
+   "opts": [
+    "SmotherFullFirst=60"
+   ]
+  }
+ ],
+ "shard": [
+  0,
+  7
+ ]
+}
