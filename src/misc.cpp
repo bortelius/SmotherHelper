@@ -55,8 +55,8 @@ namespace {
 
 // Version number or dev.
 constexpr std::string_view version            = "dev";
-constexpr std::string_view smotherfishVersion = "1.1";
-constexpr std::string_view upstreamBase       = "20261115-5d03b6e5";  // upstream master merged
+constexpr std::string_view smotherfishVersion = "1.2";
+constexpr std::string_view upstreamBase       = "20261122-3e8fde75";  // upstream master merged
 
 // Our fancy logging facility. The trick here is to replace cin.rdbuf() and
 // cout.rdbuf() with two Tie objects that tie cin and cout to a file stream. We

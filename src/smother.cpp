@@ -211,8 +211,7 @@ bool Prover::attack(int n, Kind kind, int q) {
     {
         const Move m     = moves[i].m;
         const bool quiet = moves[i].score < -5000 && !pos.gives_check(m);
-        StateInfo  st;
-        pos.do_move(m, st);
+        pos.do_move(m);
         ++ply;
 
         bool ok = false;
@@ -229,8 +228,7 @@ bool Prover::attack(int n, Kind kind, int q) {
             {
                 // Threat test: if the defender could pass, would a smother
                 // follow? Only moves that pass are searched in full.
-                StateInfo nst;
-                pos.do_null_move(nst);
+                pos.do_null_move();
                 const bool threat = attack(n - 1, SMOTHER, 0);
                 pos.undo_null_move();
                 ok = !aborted && threat && defend(n - 1, SMOTHER, q - 1, replies);
@@ -300,8 +298,7 @@ bool Prover::defend(int n, Kind kind, int q, const MoveList<ALL>& replies) {
         for (int i = 0; i < cnt; ++i)
         {
             const Move r = moves[i].m;
-            StateInfo  st;
-            pos.do_move(r, st);
+            pos.do_move(r);
             ++ply;
             const bool ok = !pos.is_draw(ply) && attack(n, kind, q);
             --ply;
@@ -325,8 +322,7 @@ bool Prover::defend(int n, Kind kind, int q, const MoveList<ALL>& replies) {
         for (int i = 0; i < cnt; ++i)
         {
             const Move r = moves[i].m;
-            StateInfo  st;
-            pos.do_move(r, st);
+            pos.do_move(r);
             ++ply;
 
             int  len  = 0;
@@ -360,8 +356,7 @@ bool Prover::defend(int n, Kind kind, int q, const MoveList<ALL>& replies) {
             if (sLen[i])
                 continue;
             const Move r = moves[i].m;
-            StateInfo  st;
-            pos.do_move(r, st);
+            pos.do_move(r);
             ++ply;
             const bool ok = S > 1 && attack(S - 1, ANY, 0);
             --ply;
@@ -390,7 +385,6 @@ int Prover::min_moves(Kind kind, int limit, int q) {
 // Follow the proof: the attacker plays the proven move, the defender picks
 // the reply that holds out longest.
 void Prover::extract_pv(int n, std::vector<Move>& pv) {
-    std::deque<StateInfo> states;
     std::vector<Move>     done;
     Kind                  kind = SMOTHER;
     int                   q    = lim.quietMoves;
@@ -404,7 +398,7 @@ void Prover::extract_pv(int n, std::vector<Move>& pv) {
             --q;
         pv.push_back(m);
         done.push_back(m);
-        pos.do_move(m, states.emplace_back());
+        pos.do_move(m);
         ++ply;
 
         MoveList<ALL> replies(pos);
@@ -416,8 +410,7 @@ void Prover::extract_pv(int n, std::vector<Move>& pv) {
         Kind bestKind = SMOTHER;
         for (const Move r : replies)
         {
-            StateInfo st;
-            pos.do_move(r, st);
+            pos.do_move(r);
             ++ply;
             // Prefer showing the smother line; a reply only falls back to a
             // plain (strictly shorter) mate when it has no smother.
@@ -441,7 +434,7 @@ void Prover::extract_pv(int n, std::vector<Move>& pv) {
             break;
         pv.push_back(best);
         done.push_back(best);
-        pos.do_move(best, states.emplace_back());
+        pos.do_move(best);
         ++ply;
         n    = bestN;
         kind = bestKind;
@@ -460,16 +453,14 @@ void Prover::extract_pv(int n, std::vector<Move>& pv) {
 // material are the typical escapes, so they weigh most.
 double Prover::robustness(Move m, int n) {
     const int q = pos.gives_check(m) ? lim.quietMoves : lim.quietMoves - 1;
-    StateInfo st;
-    pos.do_move(m, st);
+    pos.do_move(m);
     ++ply;
     double hit = 0, total = 0;
     for (const Move r : MoveList<ALL>(pos))
     {
         const bool   safe = pos.see_ge(r, Value(0));
         const double w    = pos.capture(r) && safe ? 1.0 : safe ? 0.6 : 0.2;
-        StateInfo    st2;
-        pos.do_move(r, st2);
+        pos.do_move(r);
         ++ply;
         const bool smothered = n > 1 && min_moves(SMOTHER, n - 1, q) > 0;
         --ply;
@@ -777,8 +768,7 @@ traps(Position& pos, const Limits& perReply, TimePoint deadline, const std::atom
             continue;
         }
 
-        StateInfo st;
-        pos.do_move(r, st);
+        pos.do_move(r);
 
         // Cheap filter: a king with many open neighbours cannot be smothered
         // within a few moves.

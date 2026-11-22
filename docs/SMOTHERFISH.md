@@ -1,7 +1,7 @@
 # Smotherfish guide
 
-Smotherfish 1.1 is Stockfish (development version of 15 November 2026,
-upstream commit 5d03b6e5) with one extra goal: end the game with a
+Smotherfish 1.2 is Stockfish (development version of 22 November 2026,
+upstream commit 3e8fde75) with one extra goal: end the game with a
 smothered mate. This guide explains how it works, lists every option, and
 summarises what was measured. The day-by-day development log is in
 `notes/HANDOFF.md`.
@@ -234,7 +234,7 @@ smother can be forced at all.
 
 ## Testing your own changes
 
-- `./stockfish bench` must still report 1442480 nodes (the bench of the
+- `./stockfish bench` must still report 1210779 nodes (the bench of the
   upstream base commit). The bench runs with brutal mode off; it switches
   it back on afterwards.
 - `notes/scripts/puzzles.py ENGINE smothered.csv N SEED` re-runs the prover

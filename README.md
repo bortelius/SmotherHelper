@@ -42,7 +42,7 @@ Smotherfish plays as ordinary Stockfish.
 
 Like Stockfish, Smotherfish does not include a graphical user interface. Use it
 with any UCI chess GUI, such as DroidFish on Android. It identifies itself as
-"Smotherfish 1.1 (Stockfish dev-20261115-5d03b6e5)".
+"Smotherfish 1.2 (Stockfish dev-20261122-3e8fde75)".
 
 ## What it does
 
@@ -121,7 +121,7 @@ cd src
 make -j profile-build
 ```
 
-`./stockfish bench` must report 1442480 nodes, the same as the upstream
+`./stockfish bench` must report 1210779 nodes, the same as the upstream
 Stockfish commit it is based on: the bench runs with brutal mode off, and the
 smother features do not change the normal search.
 
