@@ -1,0 +1,133 @@
+{
+ "exp": "grid40",
+ "tc": "5+0.05",
+ "chunk": 100,
+ "runs": [
+  {
+   "name": "e1500_C",
+   "elo": 1500,
+   "games": 2000,
+   "seed": 9000,
+   "chunk": 100,
+   "opts": []
+  },
+  {
+   "name": "e1500_OK",
+   "elo": 1500,
+   "games": 2000,
+   "seed": 9000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildOwnKeep=10"
+   ]
+  },
+  {
+   "name": "e1500_KN",
+   "elo": 1500,
+   "games": 2000,
+   "seed": 9000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildKeepNear=10"
+   ]
+  },
+  {
+   "name": "e1500_ES",
+   "elo": 1500,
+   "games": 2000,
+   "seed": 9000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildEscape=6"
+   ]
+  },
+  {
+   "name": "e1500_KS",
+   "elo": 1500,
+   "games": 2000,
+   "seed": 9000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildKnightSafe=8"
+   ]
+  },
+  {
+   "name": "e1500_ALL",
+   "elo": 1500,
+   "games": 2000,
+   "seed": 9000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildOwnKeep=10",
+    "SmotherBuildKeepNear=10",
+    "SmotherBuildEscape=6",
+    "SmotherBuildKnightSafe=8"
+   ]
+  },
+  {
+   "name": "e2500_C",
+   "elo": 2500,
+   "games": 800,
+   "seed": 9000,
+   "chunk": 100,
+   "opts": []
+  },
+  {
+   "name": "e2500_OK",
+   "elo": 2500,
+   "games": 800,
+   "seed": 9000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildOwnKeep=10"
+   ]
+  },
+  {
+   "name": "e2500_KN",
+   "elo": 2500,
+   "games": 800,
+   "seed": 9000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildKeepNear=10"
+   ]
+  },
+  {
+   "name": "e2500_ES",
+   "elo": 2500,
+   "games": 800,
+   "seed": 9000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildEscape=6"
+   ]
+  },
+  {
+   "name": "e2500_KS",
+   "elo": 2500,
+   "games": 800,
+   "seed": 9000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildKnightSafe=8"
+   ]
+  },
+  {
+   "name": "e2500_ALL",
+   "elo": 2500,
+   "games": 800,
+   "seed": 9000,
+   "chunk": 100,
+   "opts": [
+    "SmotherBuildOwnKeep=10",
+    "SmotherBuildKeepNear=10",
+    "SmotherBuildEscape=6",
+    "SmotherBuildKnightSafe=8"
+   ]
+  }
+ ],
+ "shard": [
+  0,
+  7
+ ]
+}

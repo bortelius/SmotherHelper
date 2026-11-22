@@ -75,6 +75,47 @@ namespace {
 
 constexpr u64 NODES_LIMIT_OUTPUT = 10'000'000;
 
+// Construction mode helpers (SmotherBuildLmr / SmotherBuildDefLmr); quiet
+// moves only, called before the move is made.
+//
+// Knight moves away from a square that checks the enemy king: 0 on such a
+// square, 1 a knight move away, else 2.
+int knight_steps(Square s, Bitboard checkSqs) {
+    return (square_bb(s) & checkSqs) ? 0 : (Attacks::attacks_bb(KNIGHT, s) & checkSqs) ? 1 : 2;
+}
+
+// Our quiet move builds the box: a knight comes closer to a checking square,
+// or another piece newly covers a square next to the enemy king that holds
+// none of its pieces (a flight square taken away).
+bool smother_builds(const Position& pos, Move m) {
+    const Color    us   = pos.side_to_move();
+    const Square   ksq  = pos.square<KING>(~us);
+    const Square   from = m.from_sq(), to = m.to_sq();
+    const PieceType pt  = type_of(pos.moved_piece(m));
+    if (pt == KNIGHT)
+    {
+        const Bitboard checkSqs = Attacks::attacks_bb(KNIGHT, ksq);
+        return knight_steps(to, checkSqs) < knight_steps(from, checkSqs);
+    }
+    if (pt == KING)
+        return false;
+    const Bitboard free = Attacks::attacks_bb(KING, ksq) & ~pos.pieces(~us);
+    const Bitboard occ  = pos.pieces() ^ square_bb(from);
+    const Bitboard after =
+      pt == PAWN ? Attacks::attacks_bb(PAWN, to, us) : Attacks::attacks_bb(pt, to, occ);
+    const Bitboard before = pt == PAWN ? Attacks::attacks_bb(PAWN, from, us)
+                                       : Attacks::attacks_bb(pt, from, pos.pieces());
+    return bool(free & after & ~before);
+}
+
+// The defender's quiet move leaves a square next to its own king: it may
+// open a flight square (or let a blocker go).
+bool smother_opens(const Position& pos, Move m) {
+    const Color us = pos.side_to_move();
+    return type_of(pos.moved_piece(m)) != KING
+        && (square_bb(m.from_sq()) & Attacks::attacks_bb(KING, pos.square<KING>(us)));
+}
+
 constexpr int SEARCHEDLIST_CAPACITY = 32;
 using SearchedList                  = ValueList<Move, SEARCHEDLIST_CAPACITY>;
 
@@ -360,15 +401,47 @@ void Search::Worker::start_smother_prover() {
 
     const Smother::Style fullStyle =
       options["SmotherClassic"] ? Smother::Style::Classic : Smother::Style::AnyPiece;
-    auto job = [&mgr, sl, fullStyle, allowed = std::move(allowed)](Position& pos) {
+    // After a near proof, how many moves longer a true smother may be
+    // (SmotherFullExtra) for the prover to look for it and prefer it.
+    const int fullExtra = int(options["SmotherFullExtra"]);
+    // Near smothers allowed: first spend SmotherFullFirst percent of the
+    // budget (time or nodes) on a true smother only, then look for a near
+    // one. 0 = off (near first, as before). Not used without any budget
+    // (deep pondering), where the true-smother search would never end.
+    const int fullFirst = int(options["SmotherFullFirst"]);
+    auto job = [&mgr, sl, fullStyle, fullExtra, fullFirst,
+                allowed = std::move(allowed)](Position& pos) {
+        if (fullFirst > 0 && sl.style == Smother::Style::Partial && (sl.deadline || sl.maxNodes))
+        {
+            Smother::Limits full = sl;
+            full.style           = fullStyle;
+            full.robust          = false;
+            if (sl.deadline)
+                full.deadline = now() + std::max<TimePoint>(1, (sl.deadline - now()) * fullFirst / 100);
+            if (sl.maxNodes)
+                full.maxNodes = std::max<std::uint64_t>(1, sl.maxNodes * fullFirst / 100);
+            Smother::Result t = Smother::prove(pos, full, mgr.smotherStop);
+            if (t.found && !t.pv.empty()
+                && std::find(allowed.begin(), allowed.end(), t.pv[0]) != allowed.end())
+            {
+                mgr.smotherPV     = t.pv;
+                mgr.smotherMateIn = t.mateIn;
+                mgr.smotherReady.store(true, std::memory_order_release);
+                sync_cout << "info string smother mate in " << t.mateIn << " proven, " << t.nodes
+                          << " nodes (true smother first)" << sync_endl;
+                return;
+            }
+            if (mgr.smotherStop)
+                return;
+        }
         Smother::Result r = Smother::prove(pos, sl, mgr.smotherStop);
         // A near ("all but one") proof found: with the budget left, look for
-        // a true smother at most three moves longer, and prefer it.
+        // a true smother at most SmotherFullExtra (3) moves longer, and prefer it.
         if (r.found && sl.style == Smother::Style::Partial && !mgr.smotherStop)
         {
             Smother::Limits full = sl;
             full.style           = fullStyle;
-            full.maxMoves        = std::min(sl.maxMoves, r.mateIn + 3);
+            full.maxMoves        = std::min(sl.maxMoves, r.mateIn + fullExtra);
             full.robust          = false;
             Smother::Result t    = Smother::prove(pos, full, mgr.smotherStop);
             if (t.found && !t.pv.empty())
@@ -819,6 +892,12 @@ bool Search::Worker::iterative_deepening() {
             buildMatDiv    = std::max(1, int(options["SmotherBuildMaterialDiv"]));
             buildStarve    = int(options["SmotherBuildStarve"]);
             buildStarveAt  = int(options["SmotherBuildStarveAt"]);
+            buildLmr       = int(options["SmotherBuildLmr"]);
+            buildDefLmr    = int(options["SmotherBuildDefLmr"]);
+            buildNmp       = int(options["SmotherBuildNmp"]);
+            buildOwnKeep   = int(options["SmotherBuildOwnKeep"]);
+            buildEscape    = int(options["SmotherBuildEscape"]);
+            buildKnightSafe = int(options["SmotherBuildKnightSafe"]);
             shapeWeight    = 0;
         }
     }
@@ -1592,7 +1671,13 @@ Value Search::Worker::search(
     }
 
     // Step 10. Null move search with verification search
+    // Construction mode (SmotherBuildNmp): while the enemy king is nearly
+    // boxed in by its own pieces, a free move for the defender is exactly how
+    // the box opens, so the null move hypothesis is unsafe for our side.
     if (cutNode
+        && !(buildSmother && buildNmp && us == shapeUs
+             && popcount(Attacks::attacks_bb(KING, pos.square<KING>(~us)) & ~pos.pieces(~us))
+                  <= buildNmp)
         && ss->staticEval + 50 * ss->priorNMPFailHigh >= beta - 13 * depth - 47 * improving + 365
         && !excludedMove && pos.non_pawn_material(us) && ss->ply >= nmpMinPly && beta >= -2000)
     {
@@ -1736,6 +1821,14 @@ moves_loop:  // When in check, search starts here
         capture    = pos.capture_stage(move);
         movedPiece = pos.moved_piece(move);
         givesCheck = pos.gives_check(move);
+
+        // Construction mode: a quiet move that builds the box (ours) or may
+        // open it (the defender's) gets less reduction (SmotherBuildLmr/DefLmr).
+        int smotherLmr = 0;
+        if (buildSmother && !capture && (buildLmr || buildDefLmr))
+            smotherLmr = us == shapeUs ? (buildLmr && smother_builds(pos, move) ? buildLmr : 0)
+                       : buildDefLmr && smother_opens(pos, move) ? buildDefLmr
+                                                                 : 0;
 
         // Calculate new depth for this move
         newDepth = depth - 1;
@@ -1938,6 +2031,8 @@ moves_loop:  // When in check, search starts here
 
         // Decrease/increase reduction for moves with a good/bad history
         r -= ss->statScore * 439 / 4096;
+
+        r -= smotherLmr;
 
         if (!capture && !is_decisive(alpha))
             r += 3 * std::clamp(alpha - eval, -64, 96);
@@ -2529,7 +2624,7 @@ Value Search::Worker::evaluate(const Position& pos) {
         if (u >= buildFloor)
         {
             u = buildFloor + (u - buildFloor) / buildMatDiv
-              + Smother::build_score(pos, shapeUs, buildSurvive, buildCap, buildVersion, buildKeep, buildKeepNear, buildStarve, buildStarveAt)
+              + Smother::build_score(pos, shapeUs, buildSurvive, buildCap, buildVersion, buildKeep, buildKeepNear, buildStarve, buildStarveAt, buildOwnKeep, buildEscape, buildKnightSafe)
                   * buildUnit;
             u = std::min(u, VALUE_TB_WIN_IN_MAX_PLY - 1);
             v = pos.side_to_move() == shapeUs ? u : -u;

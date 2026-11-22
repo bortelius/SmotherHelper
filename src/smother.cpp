@@ -647,7 +647,7 @@ static int build_score_v2(const Position& pos, Color us) {
     return score;
 }
 
-int build_score(const Position& pos, Color us, int survive, int cap, int version, int keep, int keepNear, int starve, int starveAt) {
+int build_score(const Position& pos, Color us, int survive, int cap, int version, int keep, int keepNear, int starve, int starveAt, int ownKeep, int escape, int knightSafe) {
     if (version == 2)
         return build_score_v2(pos, us);
 
@@ -678,6 +678,37 @@ int build_score(const Position& pos, Color us, int survive, int cap, int version
         const int reserve = popcount(pos.pieces(them) & ~pos.pieces(KING)) - holes;
         if (reserve < starveAt)
             score -= starve * (starveAt - reserve);
+    }
+
+    // Our mating material kept (SmotherBuildOwnKeep): points per queen and
+    // knight of ours still on the board, so they are not traded off.
+    if (ownKeep > 0)
+        score += ownKeep * popcount(pos.pieces(us, QUEEN, KNIGHT));
+
+    // Escape squares (SmotherBuildEscape): squares next to the enemy king
+    // that hold none of its pieces and that we do not attack are where a
+    // checked king steps out of the box; penalise each.
+    if (escape > 0)
+    {
+        Bitboard open = ring & ~pos.pieces(them);
+        int      n    = 0;
+        while (open)
+            n += !(pos.attackers_to(pop_lsb(open)) & pos.pieces(us));
+        score -= escape * n;
+    }
+
+    // Knight safety (SmotherBuildKnightSafe): our knights near the king that
+    // the defender attacks and we do not defend can be taken or chased.
+    if (knightSafe > 0)
+    {
+        Bitboard nk = pos.pieces(us, KNIGHT);
+        while (nk)
+        {
+            const Square   s   = pop_lsb(nk);
+            const Bitboard atk = pos.attackers_to(s);
+            if (sq_distance(s, ksq) <= 3 && (atk & pos.pieces(them)) && !(atk & pos.pieces(us)))
+                score -= knightSafe;
+        }
     }
 
     // The finishers: knights and the queen near the king.
