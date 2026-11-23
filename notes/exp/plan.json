@@ -1,0 +1,78 @@
+{
+ "exp": "human6",
+ "tc": "5+0.05",
+ "chunk": 25,
+ "runs": [
+  {
+   "name": "maia1100_he1350",
+   "elo": 1100,
+   "games": 300,
+   "seed": 20000,
+   "chunk": 25,
+   "opts": [
+    "HumanElo=1350"
+   ],
+   "opponent": "maia3-1100"
+  },
+  {
+   "name": "maia1500_he1350",
+   "elo": 1500,
+   "games": 300,
+   "seed": 20000,
+   "chunk": 25,
+   "opts": [
+    "HumanElo=1350"
+   ],
+   "opponent": "maia3-1500"
+  },
+  {
+   "name": "maia1300_he1600",
+   "elo": 1300,
+   "games": 300,
+   "seed": 20000,
+   "chunk": 25,
+   "opts": [
+    "HumanElo=1600"
+   ],
+   "opponent": "maia3-1300"
+  },
+  {
+   "name": "maia1700_he1600",
+   "elo": 1700,
+   "games": 300,
+   "seed": 20000,
+   "chunk": 25,
+   "opts": [
+    "HumanElo=1600"
+   ],
+   "opponent": "maia3-1700"
+  },
+  {
+   "name": "maia1700_he2000",
+   "elo": 1700,
+   "games": 300,
+   "seed": 20000,
+   "chunk": 25,
+   "opts": [
+    "HumanElo=2000"
+   ],
+   "opponent": "maia3-1700"
+  },
+  {
+   "name": "maia2100_he2000",
+   "elo": 2100,
+   "games": 300,
+   "seed": 20000,
+   "chunk": 25,
+   "opts": [
+    "HumanElo=2000"
+   ],
+   "opponent": "maia3-2100"
+  }
+ ],
+ "shard": [
+  0,
+  7
+ ],
+ "max_parallel": 20
+}

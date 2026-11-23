@@ -55,7 +55,7 @@ namespace {
 
 // Version number or dev.
 constexpr std::string_view version            = "dev";
-constexpr std::string_view smotherfishVersion = "1.3";
+constexpr std::string_view smotherfishVersion = "1.4";
 constexpr std::string_view upstreamBase       = "20261122-3e8fde75";  // upstream master merged
 
 // Our fancy logging facility. The trick here is to replace cin.rdbuf() and
