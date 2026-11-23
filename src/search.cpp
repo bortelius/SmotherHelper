@@ -941,7 +941,9 @@ bool Search::Worker::iterative_deepening() {
     // picked at random from a wider candidate list without Skill's cap of
     // one pawn per mistake, so the engine can really drop material, as
     // weak human players do.
-    skill.blunder = skill.enabled() ? int(options["HumanBlunder"]) : 0;
+    skill.blunder = skill.enabled() ? std::max(10 * int(options["HumanBlunder"]),
+                                               int(options["HumanBlunderPermille"]))
+                                    : 0;
     if (skill.enabled())
         multiPV = std::max(multiPV, usize(skill.blunder ? 8 : 4));
 
@@ -2801,9 +2803,13 @@ Move Skill::pick_best(const RootMoves& rootMoves, usize multiPV) {
     // With tablebases at the root, rootMoves are ordered by tbRank rather
     // than by score, so compute the score range explicitly to keep 'delta'
     // non-negative.
+    // Human mode searches 8 lines so blunders have candidates, but the normal
+    // choice stays among the usual 4 (more would weaken every move).
+    const usize choices = blunder > 0 ? std::min(multiPV, usize(4)) : multiPV;
+
     Value topScore = rootMoves[0].score;
     Value minScore = rootMoves[0].score;
-    for (usize i = 1; i < multiPV; ++i)
+    for (usize i = 1; i < choices; ++i)
     {
         topScore = std::max(topScore, rootMoves[i].score);
         minScore = std::min(minScore, rootMoves[i].score);
@@ -2812,14 +2818,14 @@ Move Skill::pick_best(const RootMoves& rootMoves, usize multiPV) {
     int    maxScore = -VALUE_INFINITE;
 
     // Human mode: a blunder is any candidate but the best, chosen uniformly.
-    if (blunder > 0 && multiPV > 1 && int(rng.rand<unsigned>() % 100) < blunder)
+    if (blunder > 0 && multiPV > 1 && int(rng.rand<unsigned>() % 1000) < blunder)
         return best = rootMoves[1 + rng.rand<unsigned>() % (multiPV - 1)].pv[0];
     double weakness = 120 - 2 * level;
 
     // Choose best move. For each move score we add two terms dependent on
     // weakness. One is deterministic and bigger for weaker levels, and one
     // is random. Then we choose the move with the resulting highest score.
-    for (usize i = 0; i < multiPV; ++i)
+    for (usize i = 0; i < choices; ++i)
     {
         // This is our magic formula
         int push = int(weakness * int(topScore - rootMoves[i].score)

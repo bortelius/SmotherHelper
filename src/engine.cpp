@@ -123,6 +123,8 @@ Engine::Engine(std::optional<std::filesystem::path> path) :
     // percent of moves picked at random from the top 8 candidates, including
     // real mistakes (Skill alone never loses more than about a pawn per move).
     options.add("HumanBlunder", Option(0, 0, 100));
+    // The same in tenths of a percent, for finer steps (the larger applies).
+    options.add("HumanBlunderPermille", Option(0, 0, 1000));
 
     options.add("Analysis Elo", Option(0, 0, Stockfish::Search::Skill::HighestElo));
 
