@@ -1,0 +1,20 @@
+{
+ "name": "m03_vs_default_s0",
+ "tc": "10+0.1",
+ "elo0": -3,
+ "elo1": 0,
+ "alpha": 0.05,
+ "beta": 0.05,
+ "new_opts": [
+  "SmotherBuildWeights=13,8,23,8,2,4",
+  "SmotherBuildKeep=11",
+  "SmotherBuildKeepNear=2",
+  "SmotherBuildEscape=4"
+ ],
+ "base_opts": [],
+ "base_ref": "",
+ "runners": 18,
+ "games": 200,
+ "max_waves": 1,
+ "seed_offset": 600000
+}
