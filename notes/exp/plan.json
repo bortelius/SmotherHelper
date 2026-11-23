@@ -1,0 +1,34 @@
+{
+ "exp": "grid41b",
+ "tc": "5+0.05",
+ "chunk": 25,
+ "runs": [
+  {
+   "name": "e1500_H120b200",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 21000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=120",
+    "SmotherBuildMoves=200"
+   ]
+  },
+  {
+   "name": "e2500_H120b200",
+   "elo": 2500,
+   "games": 400,
+   "seed": 21000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=120",
+    "SmotherBuildMoves=200"
+   ]
+  }
+ ],
+ "shard": [
+  0,
+  7
+ ],
+ "max_parallel": 20
+}
