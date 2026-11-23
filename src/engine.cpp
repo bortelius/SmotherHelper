@@ -119,6 +119,11 @@ Engine::Engine(std::optional<std::filesystem::path> path) :
     // Analysis strength (see Engine::go): 0 = full strength, else the Elo
     // whose search depth analysis ("go infinite") is capped at. Not named
     // UCI_*, so GUIs that hide those options (DroidFish) show it.
+    // Human mode: with a strength limit (UCI_LimitStrength / Skill Level), the
+    // percent of moves picked at random from the top 8 candidates, including
+    // real mistakes (Skill alone never loses more than about a pawn per move).
+    options.add("HumanBlunder", Option(0, 0, 100));
+
     options.add("Analysis Elo", Option(0, 0, Stockfish::Search::Skill::HighestElo));
 
     options.add("UCI_ShowWDL", Option(false));
@@ -232,6 +237,12 @@ Engine::Engine(std::optional<std::filesystem::path> path) :
     // moves have been played in the game (0 = never; 80 = after the default
     // construction budget is used up). SmotherPartial counts them always.
     options.add("SmotherPartialAfter", Option(0, 0, 200));
+    // Near ("all but one") proof found: look for a true smother at most this
+    // many moves longer and prefer it (bounded by the prover's move limit).
+    options.add("SmotherFullExtra", Option(3, 0, 20));
+    // Near smothers allowed: percent of the prover's budget spent first on a
+    // true smother only (0 = off: near first, then a true one if time is left).
+    options.add("SmotherFullFirst", Option(0, 0, 100));
     // One switch for the smother goal in brutal mode, for GUIs (DroidFish):
     // Full   = only true smothers count (the options above decide),
     // Hybrid = (default) true smothers first, "all but one" ones after 40 construction
@@ -249,9 +260,9 @@ Engine::Engine(std::optional<std::filesystem::path> path) :
     // floor (8 = it counts 1/8). Measured: in games where a proven smother
     // escaped, we captured ~7 enemy units after the game was decided and the
     // opponent ended with 3 pieces, against 4 and 6 in delivered smothers.
-    options.add("SmotherBuildKeep", Option(8, 0, 50));
+    options.add("SmotherBuildKeep", Option(11, 0, 50));
     // Extra points for each enemy piece within two squares of its king.
-    options.add("SmotherBuildKeepNear", Option(3, 0, 50));
+    options.add("SmotherBuildKeepNear", Option(2, 0, 50));
     options.add("SmotherBuildMaterialDiv", Option(8, 1, 64));
     // Blocker reserve guard: build-score points lost per unit of reserve
     // (enemy pieces minus open king-ring squares) below StarveAt. 0 = off.
@@ -259,6 +270,27 @@ Engine::Engine(std::optional<std::filesystem::path> path) :
     // While building, use at least 1/N of the clock left per move (0 = off).
     options.add("SmotherBuildTime", Option(0, 0, 200));
     options.add("SmotherBuildStarveAt", Option(4, 0, 15));
+    // Search control in construction mode (all 0 = off, the search is then
+    // unchanged). Lmr: less late-move reduction (1/1024 plies) for our quiet
+    // moves that bring a knight closer to a square checking the enemy king or
+    // newly cover a free square next to it. DefLmr: the same for the
+    // defender's quiet moves that leave a square next to its own king (they
+    // can open a flight square). Nmp: no null move for our side while the
+    // enemy king has at most that many squares not held by its own pieces.
+    options.add("SmotherBuildLmr", Option(0, 0, 4096));
+    options.add("SmotherBuildDefLmr", Option(0, 0, 4096));
+    options.add("SmotherBuildNmp", Option(0, 0, 8));
+    // Build-score terms (points; 0 = off): OwnKeep per queen and knight of
+    // ours on the board; Escape per square next to the enemy king that holds
+    // none of its pieces and that we do not attack; KnightSafe per knight of
+    // ours near the king that is attacked and not defended.
+    options.add("SmotherBuildOwnKeep", Option(0, 0, 50));
+    // build_score weights, space separated: boxed hole corner edge knight
+    // queen, separated by commas (for tuning; the default is the hand-set
+    // score).
+    options.add("SmotherBuildWeights", Option("13,8,23,8,2,4"));
+    options.add("SmotherBuildEscape", Option(4, 0, 50));
+    options.add("SmotherBuildKnightSafe", Option(0, 0, 50));
 
     // While pondering, let the parallel prover search deep and unbounded on
     // the opponent's time.
