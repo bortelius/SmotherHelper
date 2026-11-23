@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include <deque>
 #include <limits>
+#include <sstream>
 #include <vector>
 
 #include "attacks.h"
@@ -647,7 +648,21 @@ static int build_score_v2(const Position& pos, Color us) {
     return score;
 }
 
-int build_score(const Position& pos, Color us, int survive, int cap, int version, int keep, int keepNear, int starve, int starveAt) {
+BuildWeights buildWeights;
+
+void set_build_weights(const std::string& s) {
+    BuildWeights w;
+    std::string  t = s;  // commas or spaces between the numbers
+    std::replace(t.begin(), t.end(), ',', ' ');
+    std::istringstream is(t);
+    int*               f[] = {&w.boxed, &w.hole, &w.corner, &w.edge, &w.knight, &w.queen};
+    for (int* p : f)
+        if (!(is >> *p))
+            break;
+    buildWeights = w;
+}
+
+int build_score(const Position& pos, Color us, int survive, int cap, int version, int keep, int keepNear, int starve, int starveAt, int ownKeep, int escape, int knightSafe) {
     if (version == 2)
         return build_score_v2(pos, us);
 
@@ -661,14 +676,15 @@ int build_score(const Position& pos, Color us, int survive, int cap, int version
     const bool corner = (f == 0 || f == 7) && (r == 0 || r == 7);
     const bool edge   = f == 0 || f == 7 || r == 0 || r == 7;
 
-    int score = 12 * boxed - 10 * holes + (corner ? 25 : edge ? 10 : 0);
+    const BuildWeights& W = buildWeights;
+    int score = W.boxed * boxed - W.hole * holes + (corner ? W.corner : edge ? W.edge : 0);
 
     // Every enemy piece is a possible blocker: keep them, especially near
     // their king.
     Bitboard theirs = pos.pieces(them) & ~pos.pieces(KING);
-    score += keep * popcount(theirs);  // SmotherBuildKeep (8)
+    score += keep * popcount(theirs);  // SmotherBuildKeep (11)
     while (theirs)
-        score += sq_distance(pop_lsb(theirs), ksq) <= 2 ? keepNear : 0;  // SmotherBuildKeepNear (3)
+        score += sq_distance(pop_lsb(theirs), ksq) <= 2 ? keepNear : 0;  // SmotherBuildKeepNear (2)
 
     // Blocker reserve: enemy pieces minus open squares around their king.
     // Escaped smothers had a reserve of 2 at the first proof, delivered ones
@@ -680,13 +696,44 @@ int build_score(const Position& pos, Color us, int survive, int cap, int version
             score -= starve * (starveAt - reserve);
     }
 
+    // Our mating material kept (SmotherBuildOwnKeep): points per queen and
+    // knight of ours still on the board, so they are not traded off.
+    if (ownKeep > 0)
+        score += ownKeep * popcount(pos.pieces(us, QUEEN, KNIGHT));
+
+    // Escape squares (SmotherBuildEscape): squares next to the enemy king
+    // that hold none of its pieces and that we do not attack are where a
+    // checked king steps out of the box; penalise each.
+    if (escape > 0)
+    {
+        Bitboard open = ring & ~pos.pieces(them);
+        int      n    = 0;
+        while (open)
+            n += !(pos.attackers_to(pop_lsb(open)) & pos.pieces(us));
+        score -= escape * n;
+    }
+
+    // Knight safety (SmotherBuildKnightSafe): our knights near the king that
+    // the defender attacks and we do not defend can be taken or chased.
+    if (knightSafe > 0)
+    {
+        Bitboard nk = pos.pieces(us, KNIGHT);
+        while (nk)
+        {
+            const Square   s   = pop_lsb(nk);
+            const Bitboard atk = pos.attackers_to(s);
+            if (sq_distance(s, ksq) <= 3 && (atk & pos.pieces(them)) && !(atk & pos.pieces(us)))
+                score -= knightSafe;
+        }
+    }
+
     // The finishers: knights and the queen near the king.
     Bitboard knights = pos.pieces(us, KNIGHT);
     while (knights)
-        score += 4 * std::max(0, 4 - sq_distance(pop_lsb(knights), ksq));
+        score += W.knight * std::max(0, 4 - sq_distance(pop_lsb(knights), ksq));
     Bitboard queens = pos.pieces(us, QUEEN);
     while (queens)
-        score += 3 * std::max(0, 4 - sq_distance(pop_lsb(queens), ksq));
+        score += W.queen * std::max(0, 4 - sq_distance(pop_lsb(queens), ksq));
 
     // Blocker survivability, a bit mask (SmotherBuildSurvive): 1 pinned
     // bonus, 2 defended bonus, 4 knight-wins-it penalty, 8 pawn-push penalty.
