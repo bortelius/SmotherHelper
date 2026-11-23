@@ -1,0 +1,74 @@
+{
+ "exp": "tc180m03",
+ "tc": "180+2",
+ "chunk": 10,
+ "runs": [
+  {
+   "name": "e1500_C",
+   "elo": 1500,
+   "games": 300,
+   "seed": 13000,
+   "chunk": 10,
+   "opts": []
+  },
+  {
+   "name": "e1500_M",
+   "elo": 1500,
+   "games": 300,
+   "seed": 13000,
+   "chunk": 10,
+   "opts": [
+    "SmotherBuildWeights=13,8,23,8,2,4",
+    "SmotherBuildKeep=11",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=4"
+   ]
+  },
+  {
+   "name": "e2000_C",
+   "elo": 2000,
+   "games": 300,
+   "seed": 13000,
+   "chunk": 10,
+   "opts": []
+  },
+  {
+   "name": "e2000_M",
+   "elo": 2000,
+   "games": 300,
+   "seed": 13000,
+   "chunk": 10,
+   "opts": [
+    "SmotherBuildWeights=13,8,23,8,2,4",
+    "SmotherBuildKeep=11",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=4"
+   ]
+  },
+  {
+   "name": "e2500_C",
+   "elo": 2500,
+   "games": 300,
+   "seed": 13000,
+   "chunk": 10,
+   "opts": []
+  },
+  {
+   "name": "e2500_M",
+   "elo": 2500,
+   "games": 300,
+   "seed": 13000,
+   "chunk": 10,
+   "opts": [
+    "SmotherBuildWeights=13,8,23,8,2,4",
+    "SmotherBuildKeep=11",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=4"
+   ]
+  }
+ ],
+ "shard": [
+  0,
+  6
+ ]
+}
