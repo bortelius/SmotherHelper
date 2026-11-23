@@ -264,7 +264,7 @@ struct Skill {
     Move pick_best(const RootMoves&, usize multiPV);
 
     double level;
-    int    blunder = 0;  // HumanBlunder: percent of moves picked from the wider list
+    int    blunder = 0;  // human mode: per mille of moves picked from the wider list
     Move   best    = Move::none();
 };
 

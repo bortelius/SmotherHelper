@@ -1,0 +1,176 @@
+{
+ "exp": "grid42",
+ "tc": "5+0.05",
+ "chunk": 25,
+ "runs": [
+  {
+   "name": "e1500_D",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": []
+  },
+  {
+   "name": "e1500_H80b160",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "e1500_S40h80",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": [
+    "SmotherNearHold=80",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "e1500_S40h120",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": [
+    "SmotherNearHold=120",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "e1500_S80h80",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherNearHold=80",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "e2500_D",
+   "elo": 2500,
+   "games": 400,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": []
+  },
+  {
+   "name": "e2500_H80b160",
+   "elo": 2500,
+   "games": 400,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "e2500_S40h80",
+   "elo": 2500,
+   "games": 400,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": [
+    "SmotherNearHold=80",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "e2500_S40h120",
+   "elo": 2500,
+   "games": 400,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": [
+    "SmotherNearHold=120",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "e2500_S80h80",
+   "elo": 2500,
+   "games": 400,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherNearHold=80",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "m1500_D",
+   "elo": 1500,
+   "games": 400,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": [],
+   "opponent": "maia3-1500"
+  },
+  {
+   "name": "m1500_H80b160",
+   "elo": 1500,
+   "games": 400,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160"
+   ],
+   "opponent": "maia3-1500"
+  },
+  {
+   "name": "m1500_S40h80",
+   "elo": 1500,
+   "games": 400,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": [
+    "SmotherNearHold=80",
+    "SmotherBuildMoves=160"
+   ],
+   "opponent": "maia3-1500"
+  },
+  {
+   "name": "m1500_S40h120",
+   "elo": 1500,
+   "games": 400,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": [
+    "SmotherNearHold=120",
+    "SmotherBuildMoves=160"
+   ],
+   "opponent": "maia3-1500"
+  },
+  {
+   "name": "m1500_S80h80",
+   "elo": 1500,
+   "games": 400,
+   "seed": 22000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherNearHold=80",
+    "SmotherBuildMoves=160"
+   ],
+   "opponent": "maia3-1500"
+  }
+ ],
+ "shard": [
+  0,
+  7
+ ],
+ "max_parallel": 20
+}
