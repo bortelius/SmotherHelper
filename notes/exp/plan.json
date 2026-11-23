@@ -1,0 +1,154 @@
+{
+ "exp": "grid43",
+ "tc": "5+0.05",
+ "chunk": 25,
+ "runs": [
+  {
+   "name": "e1500_B",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 26000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "e1500_R20",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 26000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160",
+    "SmotherBuildReady=20"
+   ]
+  },
+  {
+   "name": "e1500_R60",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 26000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160",
+    "SmotherBuildReady=60"
+   ]
+  },
+  {
+   "name": "e1500_T",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 26000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160",
+    "SmotherBuildRingTable=60,50,0,-10,-15"
+   ]
+  },
+  {
+   "name": "e1500_DR30",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 26000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160",
+    "SmotherBuildDefRing=30"
+   ]
+  },
+  {
+   "name": "e1500_DR0",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 26000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160",
+    "SmotherBuildDefRing=0"
+   ]
+  },
+  {
+   "name": "e2500_B",
+   "elo": 2500,
+   "games": 400,
+   "seed": 26000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "e2500_R20",
+   "elo": 2500,
+   "games": 400,
+   "seed": 26000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160",
+    "SmotherBuildReady=20"
+   ]
+  },
+  {
+   "name": "e2500_R60",
+   "elo": 2500,
+   "games": 400,
+   "seed": 26000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160",
+    "SmotherBuildReady=60"
+   ]
+  },
+  {
+   "name": "e2500_T",
+   "elo": 2500,
+   "games": 400,
+   "seed": 26000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160",
+    "SmotherBuildRingTable=60,50,0,-10,-15"
+   ]
+  },
+  {
+   "name": "e2500_DR30",
+   "elo": 2500,
+   "games": 400,
+   "seed": 26000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160",
+    "SmotherBuildDefRing=30"
+   ]
+  },
+  {
+   "name": "e2500_DR0",
+   "elo": 2500,
+   "games": 400,
+   "seed": 26000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160",
+    "SmotherBuildDefRing=0"
+   ]
+  }
+ ],
+ "shard": [
+  0,
+  7
+ ],
+ "max_parallel": 20
+}

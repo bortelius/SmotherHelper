@@ -659,7 +659,26 @@ void set_build_weights(const std::string& s) {
     for (int* p : f)
         if (!(is >> *p))
             break;
+    // Keep the extras set by set_build_extras().
+    w.ready      = buildWeights.ready;
+    w.defRingPct = buildWeights.defRingPct;
+    w.useTable   = buildWeights.useTable;
+    std::copy(std::begin(buildWeights.ringTable), std::end(buildWeights.ringTable), w.ringTable);
     buildWeights = w;
+}
+
+void set_build_extras(int ready, int defRingPct, const std::string& ringTable) {
+    buildWeights.ready      = ready;
+    buildWeights.defRingPct = defRingPct;
+    std::string t = ringTable;
+    std::replace(t.begin(), t.end(), ',', ' ');
+    std::istringstream is(t);
+    int                n = 0, v;
+    while (n < 6 && is >> v)
+        buildWeights.ringTable[n++] = v;
+    for (int i = n; n > 0 && i < 6; ++i)
+        buildWeights.ringTable[i] = buildWeights.ringTable[n - 1];
+    buildWeights.useTable = n > 0;
 }
 
 int build_score(const Position& pos, Color us, int survive, int cap, int version, int keep, int keepNear, int starve, int starveAt, int ownKeep, int escape, int knightSafe) {
@@ -677,7 +696,27 @@ int build_score(const Position& pos, Color us, int survive, int cap, int version
     const bool edge   = f == 0 || f == 7 || r == 0 || r == 7;
 
     const BuildWeights& W = buildWeights;
-    int score = W.boxed * boxed - W.hole * holes + (corner ? W.corner : edge ? W.edge : 0);
+    int ringScore = W.useTable ? W.ringTable[std::min(holes, 5)] : W.boxed * boxed - W.hole * holes;
+    if (W.defRingPct != 100 && pos.side_to_move() != us)
+        ringScore = ringScore * W.defRingPct / 100;
+    int score = ringScore + (corner ? W.corner : edge ? W.edge : 0);
+
+    // Ready squares: where a queen move would mate once the box is closed.
+    if (W.ready && holes <= 2 && pos.pieces(us, QUEEN))
+    {
+        Bitboard qatt = 0, q = pos.pieces(us, QUEEN);
+        while (q)
+            qatt |= Attacks::attacks_bb(QUEEN, pop_lsb(q), pos.pieces());
+        Bitboard cand = ring & ~pos.pieces(us) & qatt;
+        int      n    = 0;
+        while (cand && n < 2)
+        {
+            const Square s = pop_lsb(cand);
+            if (pos.attackers_to(s) & pos.pieces(us) & ~pos.pieces(QUEEN))
+                ++n;
+        }
+        score += holes <= 1 ? W.ready * n : W.ready * n / 3;
+    }
 
     // Every enemy piece is a possible blocker: keep them, especially near
     // their king.

@@ -85,9 +85,20 @@ int shape(const Position& pos, Color us);
 // search threads start.
 struct BuildWeights {
     int boxed = 13, hole = 8, corner = 23, edge = 8, knight = 2, queen = 4;
+    // Outside review round 2 (all off by default):
+    // ready: points per "ready" square (an open ring square our queen reaches
+    //   in one move, protected by another of our pieces), at most 2, when at
+    //   most one ring square is open; a third of it with two open.
+    // defRingPct: percent of the ring score when the defender is to move.
+    // ringTable: points by the number of open ring squares (0..5+), replacing
+    //   the linear boxed/hole terms when set.
+    int  ready = 0, defRingPct = 100;
+    bool useTable = false;
+    int  ringTable[6] = {};
 };
 extern BuildWeights buildWeights;
 void set_build_weights(const std::string& s);
+void set_build_extras(int ready, int defRingPct, const std::string& ringTable);
 
 int build_score(const Position& pos, Color us, int survive = 0, int cap = 12, int version = 1, int keep = 11, int keepNear = 2, int starve = 0, int starveAt = 4, int ownKeep = 0, int escape = 4, int knightSafe = 0);
 

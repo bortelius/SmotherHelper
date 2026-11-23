@@ -116,14 +116,19 @@ Engine::Engine(std::optional<std::filesystem::path> path) :
                 Option(Stockfish::Search::Skill::LowestElo, Stockfish::Search::Skill::LowestElo,
                        Stockfish::Search::Skill::HighestElo));
 
-    // Analysis strength (see Engine::go): 0 = full strength, else the Elo
-    // whose search depth analysis ("go infinite") is capped at. Not named
-    // UCI_*, so GUIs that hide those options (DroidFish) show it.
     // Human mode: with a strength limit (UCI_LimitStrength / Skill Level), the
     // percent of moves picked at random from the top 8 candidates, including
     // real mistakes (Skill alone never loses more than about a pawn per move).
     options.add("HumanBlunder", Option(0, 0, 100));
+    // The same in tenths of a percent, for finer steps (the larger applies).
+    options.add("HumanBlunderPermille", Option(0, 0, 1000));
+    // Play like a human of this rating (1050-2400, human-like Maia-3 scale);
+    // sets the strength limit and blunders itself. 0 = off.
+    options.add("HumanElo", Option(0, 0, 2400));
 
+    // Analysis strength (see Engine::go): 0 = full strength, else the Elo
+    // whose search depth analysis ("go infinite") is capped at. Not named
+    // UCI_*, so GUIs that hide those options (DroidFish) show it.
     options.add("Analysis Elo", Option(0, 0, Stockfish::Search::Skill::HighestElo));
 
     options.add("UCI_ShowWDL", Option(false));
@@ -291,6 +296,13 @@ Engine::Engine(std::optional<std::filesystem::path> path) :
     options.add("SmotherBuildWeights", Option("13,8,23,8,2,4"));
     options.add("SmotherBuildEscape", Option(4, 0, 50));
     options.add("SmotherBuildKnightSafe", Option(0, 0, 50));
+    // Outside review round 2 (off by default; see Smother::BuildWeights):
+    // Ready: points per ready mating square; DefRing: percent of the ring
+    // score when the defender is to move; RingTable: points by open ring
+    // squares 0..5+, comma separated, replacing the linear ring terms.
+    options.add("SmotherBuildReady", Option(0, 0, 200));
+    options.add("SmotherBuildDefRing", Option(100, 0, 100));
+    options.add("SmotherBuildRingTable", Option(""));
 
     // While pondering, let the parallel prover search deep and unbounded on
     // the opponent's time.
