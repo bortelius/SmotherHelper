@@ -1,0 +1,141 @@
+{
+ "exp": "tune3",
+ "tc": "5+0.05",
+ "chunk": 50,
+ "runs": [
+  {
+   "name": "e1500_c00",
+   "elo": 1500,
+   "games": 4000,
+   "seed": 12000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=12,10,25,10,4,3",
+    "SmotherBuildKeep=8",
+    "SmotherBuildKeepNear=3",
+    "SmotherBuildEscape=0"
+   ]
+  },
+  {
+   "name": "e1500_v03",
+   "elo": 1500,
+   "games": 4000,
+   "seed": 12000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=14,11,35,5,2,4",
+    "SmotherBuildKeep=9",
+    "SmotherBuildKeepNear=4",
+    "SmotherBuildEscape=9"
+   ]
+  },
+  {
+   "name": "e1500_m07",
+   "elo": 1500,
+   "games": 4000,
+   "seed": 12000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=14,10,34,10,3,3",
+    "SmotherBuildKeep=7",
+    "SmotherBuildKeepNear=4",
+    "SmotherBuildEscape=5"
+   ]
+  },
+  {
+   "name": "e1500_m03",
+   "elo": 1500,
+   "games": 4000,
+   "seed": 12000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=13,8,23,8,2,4",
+    "SmotherBuildKeep=11",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=4"
+   ]
+  },
+  {
+   "name": "e1500_m01",
+   "elo": 1500,
+   "games": 4000,
+   "seed": 12000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=17,8,21,10,1,2",
+    "SmotherBuildKeep=10",
+    "SmotherBuildKeepNear=3",
+    "SmotherBuildEscape=4"
+   ]
+  },
+  {
+   "name": "e2500_c00",
+   "elo": 2500,
+   "games": 1500,
+   "seed": 12000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=12,10,25,10,4,3",
+    "SmotherBuildKeep=8",
+    "SmotherBuildKeepNear=3",
+    "SmotherBuildEscape=0"
+   ]
+  },
+  {
+   "name": "e2500_v03",
+   "elo": 2500,
+   "games": 1500,
+   "seed": 12000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=14,11,35,5,2,4",
+    "SmotherBuildKeep=9",
+    "SmotherBuildKeepNear=4",
+    "SmotherBuildEscape=9"
+   ]
+  },
+  {
+   "name": "e2500_m07",
+   "elo": 2500,
+   "games": 1500,
+   "seed": 12000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=14,10,34,10,3,3",
+    "SmotherBuildKeep=7",
+    "SmotherBuildKeepNear=4",
+    "SmotherBuildEscape=5"
+   ]
+  },
+  {
+   "name": "e2500_m03",
+   "elo": 2500,
+   "games": 1500,
+   "seed": 12000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=13,8,23,8,2,4",
+    "SmotherBuildKeep=11",
+    "SmotherBuildKeepNear=2",
+    "SmotherBuildEscape=4"
+   ]
+  },
+  {
+   "name": "e2500_m01",
+   "elo": 2500,
+   "games": 1500,
+   "seed": 12000,
+   "chunk": 50,
+   "opts": [
+    "SmotherBuildWeights=17,8,21,10,1,2",
+    "SmotherBuildKeep=10",
+    "SmotherBuildKeepNear=3",
+    "SmotherBuildEscape=4"
+   ]
+  }
+ ],
+ "shard": [
+  0,
+  6
+ ]
+}

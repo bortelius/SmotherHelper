@@ -14,6 +14,7 @@
 
 #include <atomic>
 #include <cstdint>
+#include <string>
 #include <vector>
 
 #include "misc.h"
@@ -79,7 +80,16 @@ int shape(const Position& pos, Color us);
 // (its own pieces around it, a corner or edge, its pieces kept alive, our
 // queen and knights close). Measured: 77% of delivered smothers were in a
 // corner, blocked mostly by the defender's own pawns, rooks and bishops.
-int build_score(const Position& pos, Color us, int survive = 0, int cap = 12, int version = 1, int keep = 8, int keepNear = 3, int starve = 0, int starveAt = 4);
+// Hand-set build_score weights (SmotherBuildWeights, comma separated): boxed, hole, corner,
+// edge, knight nearness, queen nearness. Set once per move before the
+// search threads start.
+struct BuildWeights {
+    int boxed = 12, hole = 10, corner = 25, edge = 10, knight = 4, queen = 3;
+};
+extern BuildWeights buildWeights;
+void set_build_weights(const std::string& s);
+
+int build_score(const Position& pos, Color us, int survive = 0, int cap = 12, int version = 1, int keep = 8, int keepNear = 3, int starve = 0, int starveAt = 4, int ownKeep = 0, int escape = 0, int knightSafe = 0);
 
 // Smother traps: pos has the DEFENDER to move (we just played our candidate).
 // For every legal reply, try to prove a forced smother for us with perReply
