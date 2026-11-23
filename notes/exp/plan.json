@@ -1,0 +1,89 @@
+{
+ "exp": "human2",
+ "tc": "5+0.05",
+ "chunk": 25,
+ "runs": [
+  {
+   "name": "maia1300_hb1",
+   "elo": 1300,
+   "games": 300,
+   "seed": 15000,
+   "chunk": 25,
+   "opts": [
+    "UCI_LimitStrength=true",
+    "UCI_Elo=1320",
+    "HumanBlunder=1"
+   ],
+   "opponent": "maia3-1300"
+  },
+  {
+   "name": "maia1300_hb2",
+   "elo": 1300,
+   "games": 300,
+   "seed": 15000,
+   "chunk": 25,
+   "opts": [
+    "UCI_LimitStrength=true",
+    "UCI_Elo=1320",
+    "HumanBlunder=2"
+   ],
+   "opponent": "maia3-1300"
+  },
+  {
+   "name": "maia1300_hb3",
+   "elo": 1300,
+   "games": 300,
+   "seed": 15000,
+   "chunk": 25,
+   "opts": [
+    "UCI_LimitStrength=true",
+    "UCI_Elo=1320",
+    "HumanBlunder=3"
+   ],
+   "opponent": "maia3-1300"
+  },
+  {
+   "name": "maia1500_hb1",
+   "elo": 1500,
+   "games": 300,
+   "seed": 15000,
+   "chunk": 25,
+   "opts": [
+    "UCI_LimitStrength=true",
+    "UCI_Elo=1320",
+    "HumanBlunder=1"
+   ],
+   "opponent": "maia3-1500"
+  },
+  {
+   "name": "maia1500_hb2",
+   "elo": 1500,
+   "games": 300,
+   "seed": 15000,
+   "chunk": 25,
+   "opts": [
+    "UCI_LimitStrength=true",
+    "UCI_Elo=1320",
+    "HumanBlunder=2"
+   ],
+   "opponent": "maia3-1500"
+  },
+  {
+   "name": "maia1500_hb3",
+   "elo": 1500,
+   "games": 300,
+   "seed": 15000,
+   "chunk": 25,
+   "opts": [
+    "UCI_LimitStrength=true",
+    "UCI_Elo=1320",
+    "HumanBlunder=3"
+   ],
+   "opponent": "maia3-1500"
+  }
+ ],
+ "shard": [
+  0,
+  6
+ ]
+}
