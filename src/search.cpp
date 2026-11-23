@@ -941,7 +941,9 @@ bool Search::Worker::iterative_deepening() {
     // picked at random from a wider candidate list without Skill's cap of
     // one pawn per mistake, so the engine can really drop material, as
     // weak human players do.
-    skill.blunder = skill.enabled() ? int(options["HumanBlunder"]) : 0;
+    skill.blunder = skill.enabled() ? std::max(10 * int(options["HumanBlunder"]),
+                                               int(options["HumanBlunderPermille"]))
+                                    : 0;
     if (skill.enabled())
         multiPV = std::max(multiPV, usize(skill.blunder ? 8 : 4));
 
@@ -2812,7 +2814,7 @@ Move Skill::pick_best(const RootMoves& rootMoves, usize multiPV) {
     int    maxScore = -VALUE_INFINITE;
 
     // Human mode: a blunder is any candidate but the best, chosen uniformly.
-    if (blunder > 0 && multiPV > 1 && int(rng.rand<unsigned>() % 100) < blunder)
+    if (blunder > 0 && multiPV > 1 && int(rng.rand<unsigned>() % 1000) < blunder)
         return best = rootMoves[1 + rng.rand<unsigned>() % (multiPV - 1)].pv[0];
     double weakness = 120 - 2 * level;
 

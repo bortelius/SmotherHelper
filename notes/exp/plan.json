@@ -1,0 +1,116 @@
+{
+ "exp": "human4",
+ "tc": "5+0.05",
+ "chunk": 25,
+ "runs": [
+  {
+   "name": "maia1500_pm1",
+   "elo": 1500,
+   "games": 300,
+   "seed": 18000,
+   "chunk": 25,
+   "opts": [
+    "UCI_LimitStrength=true",
+    "UCI_Elo=1320",
+    "HumanBlunderPermille=1"
+   ],
+   "opponent": "maia3-1500"
+  },
+  {
+   "name": "maia1500_pm2",
+   "elo": 1500,
+   "games": 300,
+   "seed": 18000,
+   "chunk": 25,
+   "opts": [
+    "UCI_LimitStrength=true",
+    "UCI_Elo=1320",
+    "HumanBlunderPermille=2"
+   ],
+   "opponent": "maia3-1500"
+  },
+  {
+   "name": "maia1500_pm4",
+   "elo": 1500,
+   "games": 300,
+   "seed": 18000,
+   "chunk": 25,
+   "opts": [
+    "UCI_LimitStrength=true",
+    "UCI_Elo=1320",
+    "HumanBlunderPermille=4"
+   ],
+   "opponent": "maia3-1500"
+  },
+  {
+   "name": "maia1500_pm6",
+   "elo": 1500,
+   "games": 300,
+   "seed": 18000,
+   "chunk": 25,
+   "opts": [
+    "UCI_LimitStrength=true",
+    "UCI_Elo=1320",
+    "HumanBlunderPermille=6"
+   ],
+   "opponent": "maia3-1500"
+  },
+  {
+   "name": "maia1700_pm1",
+   "elo": 1700,
+   "games": 300,
+   "seed": 18000,
+   "chunk": 25,
+   "opts": [
+    "UCI_LimitStrength=true",
+    "UCI_Elo=1320",
+    "HumanBlunderPermille=1"
+   ],
+   "opponent": "maia3-1700"
+  },
+  {
+   "name": "maia1700_pm2",
+   "elo": 1700,
+   "games": 300,
+   "seed": 18000,
+   "chunk": 25,
+   "opts": [
+    "UCI_LimitStrength=true",
+    "UCI_Elo=1320",
+    "HumanBlunderPermille=2"
+   ],
+   "opponent": "maia3-1700"
+  },
+  {
+   "name": "maia1700_pm4",
+   "elo": 1700,
+   "games": 300,
+   "seed": 18000,
+   "chunk": 25,
+   "opts": [
+    "UCI_LimitStrength=true",
+    "UCI_Elo=1320",
+    "HumanBlunderPermille=4"
+   ],
+   "opponent": "maia3-1700"
+  },
+  {
+   "name": "maia1700_pm6",
+   "elo": 1700,
+   "games": 300,
+   "seed": 18000,
+   "chunk": 25,
+   "opts": [
+    "UCI_LimitStrength=true",
+    "UCI_Elo=1320",
+    "HumanBlunderPermille=6"
+   ],
+   "opponent": "maia3-1700"
+  }
+ ],
+ "shard": [
+  0,
+  7
+ ],
+ "max_parallel": 20
+}
