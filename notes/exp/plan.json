@@ -1,0 +1,116 @@
+{
+ "exp": "grid41",
+ "tc": "5+0.05",
+ "chunk": 25,
+ "runs": [
+  {
+   "name": "e1500_H80",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 21000,
+   "chunk": 25,
+   "opts": []
+  },
+  {
+   "name": "e1500_F80",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 21000,
+   "chunk": 25,
+   "opts": [
+    "SmotherGoal=Full"
+   ]
+  },
+  {
+   "name": "e1500_F160",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 21000,
+   "chunk": 25,
+   "opts": [
+    "SmotherGoal=Full",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "e1500_H80b160",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 21000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "e1500_CF160",
+   "elo": 1500,
+   "games": 1000,
+   "seed": 21000,
+   "chunk": 25,
+   "opts": [
+    "SmotherClassic=true",
+    "SmotherGoal=Full",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "e2500_H80",
+   "elo": 2500,
+   "games": 400,
+   "seed": 21000,
+   "chunk": 25,
+   "opts": []
+  },
+  {
+   "name": "e2500_F80",
+   "elo": 2500,
+   "games": 400,
+   "seed": 21000,
+   "chunk": 25,
+   "opts": [
+    "SmotherGoal=Full"
+   ]
+  },
+  {
+   "name": "e2500_F160",
+   "elo": 2500,
+   "games": 400,
+   "seed": 21000,
+   "chunk": 25,
+   "opts": [
+    "SmotherGoal=Full",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "e2500_H80b160",
+   "elo": 2500,
+   "games": 400,
+   "seed": 21000,
+   "chunk": 25,
+   "opts": [
+    "SmotherPartialAfter=80",
+    "SmotherBuildMoves=160"
+   ]
+  },
+  {
+   "name": "e2500_CF160",
+   "elo": 2500,
+   "games": 400,
+   "seed": 21000,
+   "chunk": 25,
+   "opts": [
+    "SmotherClassic=true",
+    "SmotherGoal=Full",
+    "SmotherBuildMoves=160"
+   ]
+  }
+ ],
+ "shard": [
+  0,
+  7
+ ],
+ "max_parallel": 20
+}
