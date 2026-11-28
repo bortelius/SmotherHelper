@@ -1,0 +1,89 @@
+{
+ "exp": "grid86b",
+ "tc": "5+0.05",
+ "chunk": 50,
+ "runs": [
+  {
+   "name": "e2000_B",
+   "elo": 2000,
+   "games": 6000,
+   "seed": 116000,
+   "chunk": 50,
+   "opts": []
+  },
+  {
+   "name": "e2000_R80",
+   "elo": 2000,
+   "games": 6000,
+   "seed": 116000,
+   "chunk": 50,
+   "opts": [
+    "SmotherSeekRule50=80"
+   ]
+  },
+  {
+   "name": "e2000_R90",
+   "elo": 2000,
+   "games": 6000,
+   "seed": 116000,
+   "chunk": 50,
+   "opts": [
+    "SmotherSeekRule50=90"
+   ]
+  },
+  {
+   "name": "e2500_B",
+   "elo": 2500,
+   "games": 3000,
+   "seed": 116000,
+   "chunk": 50,
+   "opts": []
+  },
+  {
+   "name": "e2500_R80",
+   "elo": 2500,
+   "games": 3000,
+   "seed": 116000,
+   "chunk": 50,
+   "opts": [
+    "SmotherSeekRule50=80"
+   ]
+  },
+  {
+   "name": "e2500_R90",
+   "elo": 2500,
+   "games": 3000,
+   "seed": 116000,
+   "chunk": 50,
+   "opts": [
+    "SmotherSeekRule50=90"
+   ]
+  }
+ ],
+ "shard": [
+  [
+   320,
+   321,
+   322,
+   323,
+   324,
+   325,
+   326,
+   327,
+   328,
+   329,
+   330,
+   331,
+   332,
+   333,
+   334,
+   335,
+   336,
+   337,
+   338,
+   339
+  ],
+  340
+ ],
+ "max_parallel": 20
+}
